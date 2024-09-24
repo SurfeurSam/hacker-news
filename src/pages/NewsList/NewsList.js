@@ -34,7 +34,6 @@ function NewsList() {
             key={item.id}
             id={item.id}
             title={item.title}
-            url={item.url}
             date={item.time}
             username={item.by}
             score={item.score}

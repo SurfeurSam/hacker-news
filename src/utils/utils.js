@@ -6,3 +6,12 @@ export function unixToDate(inixTime) {
 
     return `${dd}/${mm}/${yy}`
 }
+
+export function domainToHostName(url) {
+    const domain = new URL(url);
+    return domain.hostname;
+}
+
+export function openExternalUrl(url) {
+    window.open(url)
+  }
