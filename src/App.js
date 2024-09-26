@@ -6,7 +6,7 @@ import { Layout } from './Components/Layout/Layout';
 function App() {
   return (
     <Layout>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<NewsListPage />} />
           <Route path="comments/:id" element={<CommentsPage />} />
