@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { NewsItem } from "../../Components/NewsItem/NewsItem";
 import { get } from "../../api/api";
-import styles from './NewsList.module.css'
+import styles from './NewsListPage.module.css'
 
-function NewsList() {
+function NewsListPage() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
@@ -44,4 +44,4 @@ function NewsList() {
   );
 }
 
-export default NewsList;
+export default NewsListPage;
