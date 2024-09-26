@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { NewsItem } from "../../Components/NewsItem/NewsItem";
 import { get } from "../../api/api";
-import styles from './NewsListPage.module.css'
+import styles from './NewsList.module.css'
 
-function NewsListPage() {
+function NewsList() {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ function NewsListPage() {
             key={item.id}
             id={item.id}
             title={item.title}
+            url={item.url}
             date={item.time}
             username={item.by}
             score={item.score}
@@ -44,4 +45,4 @@ function NewsListPage() {
   );
 }
 
-export default NewsListPage;
+export default NewsList;

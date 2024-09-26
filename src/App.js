@@ -1,15 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NewsListPage from './pages/NewsListPage/NewsListPage';
-import { CommentsPage } from './pages/CommentsPage/CommentsPage';
+import NewsList from './pages/NewsList/NewsList';
+import { Comments } from './pages/Comments/Comments';
 import { Layout } from './Components/Layout/Layout';
+
 
 function App() {
   return (
     <Layout>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<NewsListPage />} />
-          <Route path="comments/:id" element={<CommentsPage />} />
+          <Route path="/" element={<NewsList />} />
+          <Route path="comments/:id" element={<Comments />} />
         </Routes>
       </BrowserRouter>
     </Layout>
