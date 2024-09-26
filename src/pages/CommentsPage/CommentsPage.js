@@ -41,7 +41,7 @@ export function CommentsPage() {
 
   return (
     <div>
-      <Link to="/">Back</Link>
+      <Link to="/">Назад</Link>
       {news && (
         <NewsItem
           title={news.title}
