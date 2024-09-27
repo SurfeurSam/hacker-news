@@ -1,6 +1,7 @@
 import styles from "./CommentsWrapper.module.css";
 import { unixToDate, copy } from "../../utils/utils";
 import { useState } from "react";
+import { get } from "../../api/api";
 
 export function CommentsWrapper({ comments }) {
   const [openedComments, setOpenedComments] = useState({});
@@ -17,16 +18,23 @@ export function CommentsWrapper({ comments }) {
 }
 
 function Comments({ comments, openedComments, onExpandComments }) {
-  function expandComment(commentId) {
-    const opened = copy(openedComments);
-
-    if (opened[commentId]) {
-      delete opened[commentId];
+  async function getSubComments(commentId, kidsId) {
+    if(!openedComments[commentId]) {
+      const subComments = await Promise.all(
+        kidsId.map(async (id) => {
+          return await get(
+            `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
+          );
+        })
+      );
+      const opened = copy(openedComments);
+      opened[commentId] = subComments;
+      onExpandComments(opened);
     } else {
-      opened[commentId] = {};
+      const opened = copy(openedComments);
+      delete opened[commentId];
+      onExpandComments(opened);
     }
-
-    onExpandComments(opened);
   }
 
   function expandSubComments(commentId, subComments) {
@@ -48,19 +56,19 @@ function Comments({ comments, openedComments, onExpandComments }) {
             {commentItem?.kids?.length && (
               <button
                 className={styles.commentButton}
-                onClick={(e) => expandComment(commentItem.id)}
+                onClick={() => getSubComments(commentItem.id, commentItem.kids)}
               >
                 Answers
               </button>
             )}
           </div>
-          {commentItem?.kids?.length && openedComments[commentItem.id] && (
+          {openedComments[commentItem.id] && (
             <div className={styles.commentSubComment}>
               <Comments
-                comments={commentItem.kids}
+                comments={openedComments[commentItem.id]}
                 openedComments={openedComments[commentItem.id]}
                 onExpandComments={(subComments) => {
-                    expandSubComments(commentItem.id, subComments)
+                  expandSubComments(commentItem.id, subComments);
                 }}
               />
             </div>

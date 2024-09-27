@@ -9,6 +9,7 @@ export function CommentsPage() {
   const [news, setNews] = useState();
   const [comments, setComments] = useState([]);
 
+
   const getNewsComments = useCallback(async (commentsIds) => {
     return await Promise.all(
       commentsIds.map(async (id) => {
@@ -16,9 +17,6 @@ export function CommentsPage() {
           `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
         );
 
-        if (comment?.kids) {
-          comment.kids = await getNewsComments(comment.kids);
-        }
         return comment;
       })
     );
