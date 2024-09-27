@@ -19,29 +19,3 @@ export function openExternalUrl(url) {
 export function copy(entity) {
   return JSON.parse(JSON.stringify(entity));
 }
-
-// export const getNewsComments = async (commentsIds) => {
-//   return await Promise.all(
-//     commentsIds.map(async (id) => {
-//       const comment = await get(
-//         `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
-//       );
-
-//       if (comment?.kids) {
-//         comment.kids = await getNewsComments(comment.kids);
-//       }
-//       return comment;
-//     })
-//   );
-// };
-
-// export const getNewsData = async (id) => {
-//   const newsData = await get(
-//     `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
-//   );
-//   setNews(newsData);
-//   if (newsData?.kids) {
-//     const commentsData = await getNewsComments(newsData.kids);
-//     setComments(commentsData);
-//   }
-// };
